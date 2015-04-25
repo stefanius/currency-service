@@ -32,7 +32,6 @@ class AppKernel extends Kernel
             new Stef\GenerateFixturesBundle\StefGenerateFixturesBundle(),
             new Stef\SimpleCmsBundle\StefSimpleCmsBundle(),
             new Stef\RedirectTrailingSlashBundle\StefRedirectTrailingSlashBundle(),
-            new Stef\LocatieInformatieBundle\StefLocatieInformatieBundle(),
             new Stef\CurrencyServiceBundle\StefCurrencyServiceBundle(),
         );
 
