@@ -1,14 +1,21 @@
-createuser:
-	php app/console fos:user:create testuser testuser@stefanius.nl 1234
-
-createadminuser:
-	php app/console fos:user:create admin admin@stefanius.nl 1234
-
 install:
-	php app/console assetic:dump
-	php app/console braincrafted:bootstrap:install
-	make createuser
-	make createadminuser
+	make clear
+	make create-database
+	make load-fixtures
+	make create-api-user
+	make create-admin-user
+
+clear:
+	make cache-clear
+	make restart-nginx
+
+create-api-user:
+	php app/console fos:user:create apiuser testuser@stefanius.nl 1234
+	php app/console fos:user:promote apiuser ROLE_USER
+
+create-admin-user:
+	php app/console fos:user:create admin admin@stefanius.nl 1234
+	php app/console fos:user:promote admin ROLE_ADMIN
 
 create-database:
 	php app/console doctrine:database:create
@@ -16,11 +23,6 @@ create-database:
 
 load-fixtures:
 	php app/console doctrine:fixtures:load
-
-provision:
-	bash /vagrant/dev-setup/install.sh
-	make create-database
-	make load-fixtures
 
 create-fixtures:
 	php app/console stef:fixture:generate:bv-blog
@@ -33,9 +35,6 @@ test:
 restart-nginx:
 	sudo service nginx stop
 	sudo service nginx start
-
-gen-entities:
-	php app/console doctrine:generate:entities StefBVBundle
 
 cache-clear:
 	rm app/cache/dev -rf
