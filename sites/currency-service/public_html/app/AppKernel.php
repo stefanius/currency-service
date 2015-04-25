@@ -23,15 +23,9 @@ class AppKernel extends Kernel
             /* FOS*/
             new FOS\UserBundle\FOSUserBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
-            /* Ivory */
-            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
-            new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
-            /* WhiteOctober */
-            new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
             /* Stefanius */
             new Stef\GenerateFixturesBundle\StefGenerateFixturesBundle(),
             new Stef\SimpleCmsBundle\StefSimpleCmsBundle(),
-            new Stef\RedirectTrailingSlashBundle\StefRedirectTrailingSlashBundle(),
             new Stef\CurrencyServiceBundle\StefCurrencyServiceBundle(),
         );
 
