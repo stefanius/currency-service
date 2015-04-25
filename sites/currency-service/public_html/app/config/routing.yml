@@ -1,0 +1,14 @@
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+stef_simple_cms_crud:
+    resource: "@StefSimpleCmsBundle/Resources/config/routing/crud.yml"
+    prefix:   /cms
+
+stef_simple_cms_index:
+    resource: "@StefSimpleCmsBundle/Resources/config/routing/index.yml"
+    prefix:   /cms
+
+stef_currency_service:
+    resource: "@StefCurrencyServiceBundle/Resources/config/routing.yml"
+    prefix:   /

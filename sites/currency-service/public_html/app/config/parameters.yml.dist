@@ -1,0 +1,23 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: 3309
+    database_name: currency-service
+    database_user: root
+    database_password: password
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt
+    app.version: 0.0.1
+    app.title: currency-service.dev
+    app.cmstitle: Backoffice
+    app.http_entrypoint: 'http://currency-service.dev'
+    app.twitter_name: null
+    app.twitter_url: null
+    app.facebook_url: null
+    app.googleplus_url: null
+    app.analyticsid: null
+    app.domain: 'http://currency-service.dev'
