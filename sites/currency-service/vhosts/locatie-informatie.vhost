@@ -1,12 +1,12 @@
 server {
     listen      80;
-    server_name locatie-informatie.dev;
+    server_name currency-service.dev
 
-    access_log  /var/log/nginx/locatie-informatie.access.log;
-    error_log   /var/log/nginx/locatie-informatie.error.log;
+    access_log  /var/log/nginx/currency-service.access.log;
+    error_log   /var/log/nginx/currency-service.error.log;
 
     rewrite_log on;
-    root        /home/vagrant/sites/locatie-informatie/public_html/web;
+    root        /home/vagrant/sites/currency-service/public_html/web;
 
     location / {
         # try to serve file directly, fallback to app.php
@@ -20,8 +20,6 @@ server {
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         fastcgi_param HTTPS off;
     }
-
-	include /vagrant/dev-setup/*.redirects;
 
     # Static files.
     # Set expire headers, Turn off access log
