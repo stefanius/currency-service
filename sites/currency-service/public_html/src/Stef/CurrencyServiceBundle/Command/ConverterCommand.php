@@ -3,6 +3,7 @@ namespace Stef\CurrencyServiceBundle\Command;
 
 use Stef\CurrencyServiceBundle\ApiConnectors\CurrencyConverterKowabungaConnector;
 use Stef\CurrencyServiceBundle\ApiConnectors\WebservicexConnector;
+use Stef\CurrencyServiceBundle\ApiFactory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -43,23 +44,25 @@ class ConverterCommand extends ContainerAwareCommand
         return $this->getApplication()->getKernel()->getContainer()->get($service);
     }
 
+    /**
+     * @return Factory
+     */
+    public function getConverterFactory()
+    {
+        return $this->get('stef_currency_converter.factory_service');
+    }
+
     protected function getConverter($service)
     {
-        if ($service === 'kowabunga') {
-            $client = new \SoapClient('http://currencyconverter.kowabunga.net/converter.asmx?WSDL');
-            $converter = new CurrencyConverterKowabungaConnector($client);
+        $factory = $this->getConverterFactory();
 
-            return $converter;
+        $converter = $factory->getConverter($service);
+
+        if ($converter == null) {
+            throw new \Exception('Sorry, you used a wrong service.');
         }
 
-        if ($service === 'webservicex') {
-            $client = new \SoapClient('http://www.webservicex.net/currencyconvertor.asmx?WSDL');
-            $converter = new WebservicexConnector($client);
-
-            return $converter;
-        }
-
-        throw new \Exception('Sorry, you used a wrong service.');
+        return $converter;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
