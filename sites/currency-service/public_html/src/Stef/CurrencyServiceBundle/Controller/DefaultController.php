@@ -2,12 +2,32 @@
 
 namespace Stef\CurrencyServiceBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Stef\CurrencyServiceBundle\Form\ConvertType;
+use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class DefaultController extends BaseController
 {
-    public function indexAction($name)
+    public function convertAction(Request $request, $service)
     {
-        return $this->render('StefCurrencyServiceBundle:Default:index.html.twig', array('name' => $name));
+        $form = $this->createForm(new ConvertType());
+
+        if ($request->isMethod('POST')) {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $converter = $this->loadConverter($service);
+
+                return $this->render('StefCurrencyServiceBundle:Default:convert.html.twig', [
+                    'form' => $form->createView(),
+                    'exchange' => $converter->getExchange($data['from'], $data['to']),
+                    'calculated' => $converter->getCalculatedAmount($data['from'], $data['to'], $data['amount']),
+                ]);
+            }
+        }
+
+        return $this->render('StefCurrencyServiceBundle:Default:convert.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }
