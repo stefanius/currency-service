@@ -21,14 +21,6 @@ create-database:
 	php app/console doctrine:database:create
 	php app/console doctrine:schema:create
 
-load-fixtures:
-	php app/console doctrine:fixtures:load
-
-create-fixtures:
-	php app/console stef:fixture:generate:bv-blog
-	php app/console stef:fixture:generate:bv-news
-	php app/console stef:fixture:generate:bv-page
-
 test:
 	php bin/phpunit -c app/
 
