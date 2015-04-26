@@ -1,7 +1,7 @@
 <?php
 namespace Stef\CurrencyServiceBundle\ApiConnectors;
 
-class CurrencyConverterKowabungaConnector extends AbstractConnector
+class CurrencyConverterKowabungaConnector extends AbstractSoapConnector
 {
     public function getExchange($currencyFrom, $currencyTo)
     {

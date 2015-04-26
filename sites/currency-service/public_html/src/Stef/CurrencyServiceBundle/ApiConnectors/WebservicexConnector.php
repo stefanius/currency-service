@@ -1,7 +1,7 @@
 <?php
 namespace Stef\CurrencyServiceBundle\ApiConnectors;
 
-class WebservicexConnector extends AbstractConnector
+class WebservicexConnector extends AbstractSoapConnector
 {
     /**
      * @inheritdoc

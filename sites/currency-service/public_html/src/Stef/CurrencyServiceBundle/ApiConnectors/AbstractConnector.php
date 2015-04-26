@@ -4,16 +4,6 @@ namespace Stef\CurrencyServiceBundle\ApiConnectors;
 abstract class AbstractConnector implements ConnectorInterface
 {
     /**
-     * @var \SoapClient
-     */
-    protected $client;
-
-    function __construct(\SoapClient $client)
-    {
-        $this->client = $client;
-    }
-
-    /**
      * Get the calculated amount of the currency
      *
      * @param $currencyFrom
