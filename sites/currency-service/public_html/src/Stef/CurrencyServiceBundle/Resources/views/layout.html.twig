@@ -40,6 +40,7 @@
                 {% if is_granted('ROLE_USER') %}
                     <li><a href="{{ path('stef_currency_service_convert', {'service': 'kowabunga'}) }}">Convert Kowabunga</a></li>
                     <li><a href="{{ path('stef_currency_service_convert', {'service': 'webservicex'}) }}">Convert Webservicex</a></li>
+                    <li><a href="{{ path('stef_currency_service_convert', {'service': 'jsonrates'}) }}">Convert Jsonrates</a></li>
                     <li><a href="/logout">Logout</a></li>
                 {% endif %}
             </ul>

@@ -47,6 +47,10 @@ class BaseController extends Controller
             return $this->get('stef_simple_cms.webservicex_manager');
         }
 
+        if ($service === 'jsonrates') {
+            return $this->get('stef_simple_cms.jsonrates_manager');
+        }
+
         return null;
     }
 

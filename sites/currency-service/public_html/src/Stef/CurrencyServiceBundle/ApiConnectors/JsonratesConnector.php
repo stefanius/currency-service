@@ -10,7 +10,7 @@ class JsonratesConnector extends AbstractJsonConnector
      */
     public function getExchange($currencyFrom, $currencyTo)
     {
-        $data = file_get_contents('http://jsonrates.com/get/?from=' . $currencyFrom . '&to=' . $currencyTo . '&apiKey=' . $this->apiKey);
+        $data = file_get_contents($this->url . '?from=' . $currencyFrom . '&to=' . $currencyTo . '&apiKey=' . $this->apiKey);
         $json = json_decode($data);
         $rate = (float) $json->rate;
 
@@ -23,8 +23,8 @@ class JsonratesConnector extends AbstractJsonConnector
     public function getSupportedCurrencies()
     {
         return [
-            'USD' => 'USD',
-            'EUR' => 'EUR',
+            'USD' => 'United States Dollar',
+            'EUR' => 'Euro',
         ];
     }
 }
