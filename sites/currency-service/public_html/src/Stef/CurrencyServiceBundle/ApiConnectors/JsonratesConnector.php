@@ -4,6 +4,7 @@ namespace Stef\CurrencyServiceBundle\ApiConnectors;
 class JsonratesConnector extends AbstractJsonConnector
 {
     protected $apiKey = 'jr-d235b4bf2cf4e0230b6d222c2016f2c4';
+
     /**
      * @inheritdoc
      */
