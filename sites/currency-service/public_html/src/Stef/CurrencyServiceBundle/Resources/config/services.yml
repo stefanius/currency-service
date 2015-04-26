@@ -1,3 +1,25 @@
 services:
     stef_currency_converter.factory_service:
         class: Stef\CurrencyServiceBundle\ApiFactory\Factory
+
+    stef_simple_cms.currency_converter_manager:
+        class: Stef\CurrencyServiceBundle\Manager\CurrencyConverterOptionsManager
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    stef_simple_cms.webservicex_manager:
+        class: Stef\CurrencyServiceBundle\Manager\WebservicexOptionsManager
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    stef_simple_cms.entity_mapper:
+        class: Stef\SimpleCmsBundle\EntityMapper\Mapper
+        calls:
+            - [addNewMapping, ["CurrencyConverterOptions", "StefCurrencyServiceBundle", "Stef\CurrencyServiceBundle\Entity", "@stef_simple_cms.currency_converter_manager"]]
+            - [addNewMapping, ["WebservicexOptions", "StefCurrencyServiceBundle", "Stef\CurrencyServiceBundle\Entity", "@stef_simple_cms.webservicex_manager"]]
+
+    stef_simple_cms.default_list_view:
+        class: Stef\CurrencyServiceBundle\ListView\DefaultOptionsListView
+
+    stef_simple_cms.list_view_service:
+        class: Stef\SimpleCmsBundle\ListView\ListViewService
+        calls:
+            - [addView, [default, "@stef_simple_cms.default_list_view"]]

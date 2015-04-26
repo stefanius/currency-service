@@ -1,15 +1,11 @@
 <?php
 namespace Stef\CurrencyServiceBundle\Command;
 
-use Stef\CurrencyServiceBundle\ApiConnectors\CurrencyConverterKowabungaConnector;
-use Stef\CurrencyServiceBundle\ApiConnectors\WebservicexConnector;
-use Stef\CurrencyServiceBundle\ApiFactory\Factory;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ConverterCommand extends ContainerAwareCommand
+class ConverterCommand extends AbstractCurrencyCommand
 {
     protected function configure()
     {
@@ -39,32 +35,6 @@ class ConverterCommand extends ContainerAwareCommand
         ;
     }
 
-    protected function get($service)
-    {
-        return $this->getApplication()->getKernel()->getContainer()->get($service);
-    }
-
-    /**
-     * @return Factory
-     */
-    public function getConverterFactory()
-    {
-        return $this->get('stef_currency_converter.factory_service');
-    }
-
-    protected function getConverter($service)
-    {
-        $factory = $this->getConverterFactory();
-
-        $converter = $factory->getConverter($service);
-
-        if ($converter == null) {
-            throw new \Exception('Sorry, you used a wrong service.');
-        }
-
-        return $converter;
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $service = $input->getArgument('service');
@@ -86,6 +56,4 @@ class ConverterCommand extends ContainerAwareCommand
             $output->writeln('The value of ' . $amount . ' ' . $from . ' is the same as ' . $calculated . ' ' . $to . '. (rounded)');
         }
     }
-
-
 }
