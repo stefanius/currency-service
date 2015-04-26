@@ -1,6 +1,7 @@
 <?php
 namespace Stef\CurrencyServiceBundle\Manager;
 
+use Stef\CurrencyServiceBundle\Entity\AbstractServiceOptionsEntity;
 use Stef\SimpleCmsBundle\Manager\AbstractObjectManager;
 
 abstract class AbstractOptionsManager extends AbstractObjectManager
@@ -18,5 +19,16 @@ abstract class AbstractOptionsManager extends AbstractObjectManager
         }
 
         return $entity;
+    }
+
+    /**
+     * @param AbstractServiceOptionsEntity $entity
+     */
+    public function persist($entity) {
+        $checkEntity = $this->read($entity->getCurrencyServiceCode());
+
+        if ($checkEntity == null) {
+            parent::persist($entity);
+        }
     }
 }
