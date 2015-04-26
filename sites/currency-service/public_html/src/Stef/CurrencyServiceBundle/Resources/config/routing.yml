@@ -1,3 +1,7 @@
 stef_currency_service_convert:
     path:     /convert/{service}
     defaults: { _controller: StefCurrencyServiceBundle:Default:convert }
+
+stef_currency_index:
+    path:     /
+    defaults: { _controller: StefCurrencyServiceBundle:Default:index }

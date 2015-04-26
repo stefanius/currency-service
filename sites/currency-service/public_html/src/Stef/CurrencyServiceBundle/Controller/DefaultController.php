@@ -30,4 +30,9 @@ class DefaultController extends BaseController
             'form' => $form->createView(),
         ]);
     }
+
+    public function indexAction()
+    {
+        return $this->render('StefCurrencyServiceBundle:Default:index.html.twig');
+    }
 }

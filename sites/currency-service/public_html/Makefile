@@ -10,7 +10,7 @@ clear:
 	make restart-nginx
 
 create-api-user:
-	php app/console fos:user:create apiuser testuser@stefanius.nl 1234
+	php app/console fos:user:create apiuser apiuser@stefanius.nl 1234
 	php app/console fos:user:promote apiuser ROLE_USER
 
 create-admin-user:

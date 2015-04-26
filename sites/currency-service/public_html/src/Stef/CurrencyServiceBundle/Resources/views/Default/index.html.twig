@@ -1,1 +1,11 @@
-Hello {{ name }}!
+{% extends "StefCurrencyServiceBundle::layout.html.twig" %}
+
+{% block content %}
+    <div class="col-md-6">
+        <h1>Warm Welcome</h1>
+        <p>
+            Welcome on the greatest CurrencyConverterService! We combined a bunch of sources to get the correct exchange rates! <a href="{{ path('stef_currency_service_convert', {'service': 'webservicex'}) }}">Login</a> and in the top-navigation you can choose a service you want to use!
+        </p>
+    </div>
+
+{% endblock %}

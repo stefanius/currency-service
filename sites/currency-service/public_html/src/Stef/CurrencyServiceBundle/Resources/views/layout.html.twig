@@ -33,9 +33,15 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/cms">CMS</a></li>
-                <li><a href="/convert/kowabunga">Convert Kowabunga</a></li>
-                <li><a href="/convert/webservicex">Convert Webservicex</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="/cms">CMS</a></li>
+                {% endif %}
+
+                {% if is_granted('ROLE_USER') %}
+                    <li><a href="{{ path('stef_currency_service_convert', {'service': 'kowabunga'}) }}">Convert Kowabunga</a></li>
+                    <li><a href="{{ path('stef_currency_service_convert', {'service': 'webservicex'}) }}">Convert Webservicex</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
