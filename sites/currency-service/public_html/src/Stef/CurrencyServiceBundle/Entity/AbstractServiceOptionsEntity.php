@@ -28,10 +28,9 @@ class AbstractServiceOptionsEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="currency_service_code", type="string", length=255)
+     * @ORM\Column(name="currency_service_code", type="string", length=3, unique=true)
      */
     protected $currencyServiceCode;
-
 
     /**
      * Get id
