@@ -6,6 +6,8 @@ use Stef\CurrencyServiceBundle\ApiConnectors\ConnectorInterface;
 use Stef\CurrencyServiceBundle\ApiConnectors\CurrencyConverterKowabungaConnector;
 use Stef\CurrencyServiceBundle\ApiConnectors\WebservicexConnector;
 use Stef\CurrencyServiceBundle\ApiFactory\Factory;
+use Stef\CurrencyServiceBundle\Entity\AbstractServiceOptionsEntity;
+use Stef\CurrencyServiceBundle\Manager\AbstractOptionsManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BaseController extends Controller
@@ -28,5 +30,49 @@ class BaseController extends Controller
         $factory = $this->getConverterFactory();
 
         return $factory->getConverter($service);
+    }
+
+    /**
+     * @param $service
+     *
+     * @@return AbstractOptionsManager
+     */
+    protected function getOptionsManager($service)
+    {
+        if ($service === 'kowabunga') {
+            return $this->get('stef_simple_cms.currency_converter_manager');
+        }
+
+        if ($service === 'webservicex') {
+            return $this->get('stef_simple_cms.webservicex_manager');
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $service
+     *
+     * @return array
+     */
+    protected function getChoices($service)
+    {
+        $manager = $this->getOptionsManager($service);
+        $choices = [];
+
+        if ($manager == null) {
+            return [];
+        }
+
+        $list = $manager->getAllRecords();
+
+        /**
+         * @var AbstractServiceOptionsEntity $item
+         */
+        foreach ($list as $item) {
+            $choices[$item->getCurrencyServiceCode()] = $item->getCurrencyDisplayName();
+        }
+
+        return $choices;
     }
 }

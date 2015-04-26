@@ -9,7 +9,9 @@ class DefaultController extends BaseController
 {
     public function convertAction(Request $request, $service)
     {
-        $form = $this->createForm(new ConvertType());
+        $choices = $this->getChoices($service);
+        $convertType = new ConvertType($choices);
+        $form = $this->createForm($convertType);
 
         if ($request->isMethod('POST')) {
             $form->bind($request);

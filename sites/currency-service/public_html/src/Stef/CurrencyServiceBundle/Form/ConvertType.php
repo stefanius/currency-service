@@ -9,21 +9,29 @@ use Symfony\Component\Validator\Constraints\Collection;
 
 class ConvertType extends AbstractType
 {
+    protected $choices = [];
+
+    /**
+     * @param array $choices
+     */
+    function __construct($choices)
+    {
+        $this->choices = $choices;
+    }
+
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('from', 'choice', [
-                'choices' => [
-                    'USD' => 'USD',
-                    'EUR' => 'EUR',
-                ],
+                'choices' => $this->choices,
                 'label' => 'From',
             ])
             ->add('to', 'choice', [
-                'choices' => [
-                    'USD' => 'USD',
-                    'EUR' => 'EUR',
-                ],
+                'choices' => $this->choices,
                 'label' => 'To',
             ])
             ->add('amount', 'text', [
@@ -33,13 +41,11 @@ class ConvertType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $collectionConstraint = new Collection(array(
+        $collectionConstraint = new Collection([]);
 
-        ));
-
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'constraints' => $collectionConstraint
-        ));
+        ]);
     }
 
     public function getName()
