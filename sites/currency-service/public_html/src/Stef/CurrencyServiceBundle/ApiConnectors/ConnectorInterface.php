@@ -23,4 +23,11 @@ interface ConnectorInterface
      * @return double
      */
     public function getCalculatedAmount($currencyFrom, $currencyTo, $amount);
+
+    /**
+     * Get a list of the supported currencies.
+     *
+     * @return array
+     */
+    public function getSupportedCurrencies();
 }
